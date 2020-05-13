@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Register</title>
+</head>
+<body>
+    <h1>Registration Page</h1>
+    <form method="post" action="{% url 'register' %}">
+        {% csrf_token %}
+
+        {% if form.errors %}
+        <p>Please Try Again</p>
+        {% endif %}
+
+        {{ form }}
+
+        <input type="submit" value="Register">
+        <button class="btn btn-lg btn-primary btn-block" type="button" value="Go back!" onclick="javascript:location.href='/'">Back</button>
+    </form>
+</body>
+</html>

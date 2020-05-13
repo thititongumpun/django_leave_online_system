@@ -1,0 +1,64 @@
+  
+{% extends "leave_register/base.html" %}
+
+
+{% block content %}
+<div class="card-body">
+<table class="table table-hover">
+    <thead class="border-bottom font-weight-bold">
+        <tr>
+            <td>FullName</td>
+            <td>Position</td>
+            <td>Description</td>
+            <td>Type</td>
+            <td>LeaveDate</td>
+            <td>LeaveEndDate</td>
+            <td>CreateDate</td>
+            
+            <td>
+                <a href="{% url 'employee_insert' %}" class="btn btn-outline-success">
+                    <i class="fas fa-plus"></i> Add New
+                </a>
+            </td>
+  
+        </tr>
+    </thead>
+    <tbody>
+        {% for leave in leave_list %}
+            <tr>
+                <td>{{leave.fullName}}</td>
+                <td>{{leave.position}}</td>
+                <td>{{leave.description}}</td>
+                <td>{{leave.type}}</td>
+                <td>{{leave.leaveDate}}</td>
+                <td>{{leave.leaveEndDate}}</td>
+                <td>{{leave.createTime}}</td>                
+                <td>
+                    {% if user.is_superuser %}
+                    <a href="{% url 'leave_update' leave.id %}" class="btn text-secondary px-0">
+                        <i class="far fa-edit fa-lg">edit</i>
+                    </a>
+                    <form action="{% url 'leave_delete' leave.id %}" method="post" class="d-inline">
+                        {% csrf_token %}
+                        <button type="submit" class="btn">
+                            <i class="far fa-trash-alt fa-lg text-danger float-right" onclick="return confirm('Are you sure you want to delete?')">delete</i>
+                        </button>
+                    {% elif user.is_staff %}
+                    <a href="{% url 'leave_update' leave.id %}" class="btn text-secondary px-0">
+                        <i class="far fa-edit fa-lg">edit</i>
+                    </a>
+                    {% else %}
+                    Read-Only
+                    {% endif %}
+                    </form>
+                </td>
+            </tr>
+
+
+            
+        {% endfor %}
+    </tbody>
+</table>
+</div>
+
+{% endblock content %}

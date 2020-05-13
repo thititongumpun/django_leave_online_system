@@ -1,0 +1,51 @@
+{% extends "leave_register/base.html" %}
+{% load crispy_forms_tags %}
+
+
+{% block content %}
+<form action="" method="post" autocomplete="off">
+    {% csrf_token %}    
+    {{form.fullName|as_crispy_field}}
+    {{form.position|as_crispy_field}}
+    {{form.description|as_crispy_field}}
+    {{form.type|as_crispy_field}}
+    
+    <div id="datetimepicker" class="input-append">  
+    {{form.leaveDate|as_crispy_field}}  
+      <span class="add-on">
+        <i data-time-icon="icon-time" data-date-icon="icon-calendar">
+        </i>
+      </span> 
+    </div>
+
+    <div id="datetimepicker2" class="input-append">  
+    {{form.leaveEndDate|as_crispy_field}}  
+      <span class="add-on">
+        <i data-time-icon="icon-time" data-date-icon="icon-calendar">
+        </i>
+      </span> 
+    </div>    
+
+    <div id="datetimepicker3" class="input-append">  
+    {{form.createTime|as_crispy_field}}  
+      <span class="add-on">
+        <i data-time-icon="icon-time" data-date-icon="icon-calendar">
+        </i>
+      </span> 
+    </div>        
+
+    <div class="row">
+        <div class="col-md-8">
+            <button type="submit" class="btn btn-success btn-block btn-lg"><i class="fas fa-database"></i>
+                Submit</button>
+        </div>
+        <div class="col-md-4">
+            <a href="{% url 'employee_list' %}" class="btn btn-secondary btn-block btn-lg">
+                <i class="fas fa-stream"></i> Back to list
+            </a>
+        </div>
+    </div>
+</form>
+{% endblock content %}
+
+
